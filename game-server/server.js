@@ -3,10 +3,19 @@ var app = express();
 
 var env = require('./config.json');
 
-app.get('/', function (req, res) {
-	res.send('Hello World!')
-})
+app.get('/connect/:groupName', function(req, res) {
+	res.send(req.params.groupName)
+});
 
+app.get('/play/:x/:y/:playerId', function(req, res) {
+	res.send(req.params.playerId + ' played ' + req.params.x + ':' + req.params.y)
+});
+
+app.get('/turn/:playerId', function(req, res) {
+	res.send(req.params.playerId)
+});
+
+// Launch server
 app.listen(env.port, function () {
-	console.log('Example app listening on port 3000!')
-})
+	console.log('Server running on port ' + env.port)
+});
