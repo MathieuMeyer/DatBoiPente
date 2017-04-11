@@ -3,6 +3,9 @@ var app = express();
 
 var env = require('./config.json');
 
+var GameManager = require('./src/game-manager.js');
+var gameManager = new GameManager(env);
+
 app.get('/connect/:groupName', function(req, res) {
 	res.send(req.params.groupName)
 });
