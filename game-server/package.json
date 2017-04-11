@@ -1,0 +1,22 @@
+{
+  "name": "dat-boi-pente",
+  "version": "1.0.0",
+  "description": "A game server for managing the Pente game logic",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MathieuMeyer/DatBoiPente.git"
+  },
+  "author": "Team Dat Boi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MathieuMeyer/DatBoiPente/issues"
+  },
+  "homepage": "https://github.com/MathieuMeyer/DatBoiPente#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
