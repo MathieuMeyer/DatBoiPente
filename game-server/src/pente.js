@@ -29,6 +29,7 @@ class Pente{
 		if(place_pion[0]<0 || place_pion[0]>18 || place_pion[1]<0 || place_pion[1]>18){
 			return false;
 		}
+		//2ème tour du premier joueur, il ne peut pas placer son exactement là où il le souhaite
 		if(this.round == 3 && place_pion[0]<7 || place_pion[0]>11 || place_pion[1]<7 || place_pion[1]>11 ){
 			return false;
 		}
@@ -64,6 +65,7 @@ class Pente{
 		piecesToDelete[];
 		var colorOne = this.player == 1 ? "W" : "B";
 		var colorTwo = this.player != 1 ? "B" : "W";
+		var clampPlayer = this.player != 1 ? "One" : "Two";
 		for(var i=0; gameBoard.length; i++){
 			var col;
 			var line;
@@ -74,13 +76,7 @@ class Pente{
 						&& gameBoard[i][col][line-1] == colorTwo 
 						&& gameBoard[i][col][line-2] == colorTwo 
 						&& gameBoard[i][col][line-3] == colorOne){
-						if(this.player == 1)
-						{
-							this.nbOfClampPlayerOne++;
-						}
-						else{
-							this.nbOfClampPlayerTwo++;
-						}
+						this.eval(nbOfClampPlayerOne+clampPlayer)++;
 						//////////////////////
 						//TODO supprimer gameBoard[i][col][line-1] et gameBoard[i][col][line-2]
 						//////////////////////
@@ -93,13 +89,10 @@ class Pente{
 						&& gameBoard[i][col+1][line-1] == colorTwo 
 						&& gameBoard[i][col+2][line-2] == colorTwo 
 						&& gameBoard[i][col+3][line-3] == colorOne){
-						if(this.player == 1)
-						{
-							this.nbOfClampPlayerOne++;
-						}
-						else{
-							this.nbOfClampPlayerTwo++;
-						}
+						this.eval(nbOfClampPlayerOne+clampPlayer)++;
+						//////////////////////
+						//TODO supprimer gameBoard[i][col+1][line-1] et gameBoard[i][col+2][line-2]
+						//////////////////////
 						alreadyScannedPieces.push(gameBoard[i][col+2][line-3]);
 					}
 				}
@@ -109,13 +102,10 @@ class Pente{
 						&& gameBoard[i][col+1][line] == colorTwo 
 						&& gameBoard[i][col+2][line] == colorTwo 
 						&& gameBoard[i][col+3][line] == colorOne){
-						if(this.player == 1)
-						{
-							this.nbOfClampPlayerOne++;
-						}
-						else{
-							this.nbOfClampPlayerTwo++;
-						}
+						this.eval(nbOfClampPlayerOne+clampPlayer)++;
+						//////////////////////
+						//TODO supprimer gameBoard[i][col+1][line] et gameBoard[i][col+2][line]
+						//////////////////////
 						alreadyScannedPieces.push(gameBoard[i][col+2][line-3]);
 					}
 				}
@@ -125,13 +115,10 @@ class Pente{
 						&& gameBoard[i][col+1][line+1] == colorTwo 
 						&& gameBoard[i][col+2][line+2] == colorTwo 
 						&& gameBoard[i][col+3][line+3] == colorOne){
-						if(this.player == 1)
-						{
-							this.nbOfClampPlayerOne++;
-						}
-						else{
-							this.nbOfClampPlayerTwo++;
-						}
+						this.eval(nbOfClampPlayerOne+clampPlayer)++;
+						//////////////////////
+						//TODO supprimer gameBoard[i][col+1][line+1] et gameBoard[i][col+2][line+2]
+						//////////////////////
 						alreadyScannedPieces.push(gameBoard[i][col+3][line+3]);
 					}
 				}
@@ -141,13 +128,10 @@ class Pente{
 						&& gameBoard[i][col][line+1] == colorTwo 
 						&& gameBoard[i][col][line+2] == colorTwo 
 						&& gameBoard[i][col][line+3] == colorOne){
-						if(this.player == 1)
-						{
-							this.nbOfClampPlayerOne++;
-						}
-						else{
-							this.nbOfClampPlayerTwo++;
-						}
+						this.eval(nbOfClampPlayerOne+clampPlayer)++;
+						//////////////////////
+						//TODO supprimer gameBoard[i][col][line+1] et gameBoard[i][col][line+2]
+						//////////////////////
 						alreadyScannedPieces.push(gameBoard[i][col][line+3]);
 					}
 				}
@@ -157,13 +141,10 @@ class Pente{
 						&& gameBoard[i][col-1][line+1] == colorTwo 
 						&& gameBoard[i][col-2][line+2] == colorTwo 
 						&& gameBoard[i][col-3][line+3] == colorOne){
-						if(this.player == 1)
-						{
-							this.nbOfClampPlayerOne++;
-						}
-						else{
-							this.nbOfClampPlayerTwo++;
-						}
+						this.eval(nbOfClampPlayerOne+clampPlayer)++;
+						//////////////////////
+						//TODO supprimer gameBoard[i][col-1][line+1] et gameBoard[i][col-2][line+2]
+						//////////////////////
 						alreadyScannedPieces.push(gameBoard[i][col-3][line+3]);
 					}
 				}
@@ -173,13 +154,10 @@ class Pente{
 						&& gameBoard[i][col-1][line] == colorTwo 
 						&& gameBoard[i][col-2][line] == colorTwo 
 						&& gameBoard[i][col-3][line] == colorOne){
-						if(this.player == 1)
-						{
-							this.nbOfClampPlayerOne++;
-						}
-						else{
-							this.nbOfClampPlayerTwo++;
-						}
+						this.eval(nbOfClampPlayerOne+clampPlayer)++;
+						//////////////////////
+						//TODO supprimer gameBoard[i][col-1][line] et gameBoard[i][col-2][line]
+						//////////////////////
 						alreadyScannedPieces.push(gameBoard[i][col-3][line]);
 					}
 				}
@@ -189,13 +167,10 @@ class Pente{
 						&& gameBoard[i][col-1][line-1] == colorTwo 
 						&& gameBoard[i][col-2][line-2] == colorTwo 
 						&& gameBoard[i][col-3][line-3] == colorOne){
-						if(this.player == 1)
-						{
-							this.nbOfClampPlayerOne++;
-						}
-						else{
-							this.nbOfClampPlayerTwo++;
-						}
+						this.eval(nbOfClampPlayerOne+clampPlayer)++;
+						//////////////////////
+						//TODO supprimer gameBoard[i][col-1][line-1] et gameBoard[i][col-2][line-2]
+						//////////////////////
 						alreadyScannedPieces.push(gameBoard[i][col-3][line]);
 					}
 				}
