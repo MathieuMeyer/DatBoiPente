@@ -68,7 +68,6 @@ var view = {
     }
 
     this.resizeBoard();
-    if (debug) console.log('Board initialized. First move: ' + model.currentPlayerColor);
     document.getElementById('stolenWhite').innerHTML = "";
     document.getElementById('stolenBlack').innerHTML = "";
     document.getElementById('options').innerHTML = "Options";

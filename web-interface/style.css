@@ -2,6 +2,7 @@
 	text-decoration: none;
 	margin: auto;
 }
+
 #bloc_page{
 	height: 100%;
 	margin: auto;
@@ -31,31 +32,39 @@
 }
 
 table{
-	width: 600px;
-	height: 600px;
+	width: 608px;
+	height: 608px;
 	border-spacing: 0;
-	border: black solid 1px;
 	border-collapse: collapse;
     box-shadow: 0 0 20px 2px black;
+	background:url("board.png");
 }
 
 #wrapper{
 
 }
+
 #gameboard {
 	display: inline-block;
 }
+
 h1{
+	font-size: 50px;
 	text-align: center;
 	padding-top: 15px;
 	padding-bottom: 25px;
+	font-family: 'Macondo', cursive;
 }
-tr td{
-	border: black solid 1px;
+
+.hr{
+	height:2px;
+	width: 20%;
+	margin:auto;
+	margin-bottom:30px;
+	background:black;
 }
 
 .shadow-box {
     -webkit-filter: drop-shadow( -2px 5px 5px gray );
             filter: drop-shadow( -2px 5px 5px gray ); /* Same syntax as box-shadow */
 }
-
