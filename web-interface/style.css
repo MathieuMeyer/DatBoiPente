@@ -1,20 +1,61 @@
+*{
+	text-decoration: none;
+	margin: auto;
+}
+#bloc_page{
+	height: 100%;
+	margin: auto;
+}
+
+.container{
+	display: center;
+}
+
+.block{
+	display: inline-block;
+	background-color: #FFFFFF;
+	border: 1px solid #000000;
+	border-radius: 5px;
+	padding: 10px;
+	line-height: 100%;
+	font-size: 12px;
+	font-size: 14px;
+}
+
+.player1{
+	float: left;
+}
+
+.player2{
+	float: right;
+}
+
 table{
 	width: 600px;
 	height: 600px;
-	margin: auto;
 	border-spacing: 0;
 	border: black solid 1px;
 	border-collapse: collapse;
-    margin-bottom: 10px;
     box-shadow: 0 0 20px 2px black;
-    border-top: 1px solid #e8e6b8;
-    border-left: 1px solid #e8e6b8;
-    border-bottom: 1px solid #6d6c44;
-    border-right: 1px solid #6d644;
+}
+
+#wrapper{
+
+}
+#gameboard {
+	display: inline-block;
 }
 h1{
 	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 25px;
 }
 tr td{
 	border: black solid 1px;
 }
+
+.shadow-box {
+    -webkit-filter: drop-shadow( -2px 5px 5px gray );
+            filter: drop-shadow( -2px 5px 5px gray ); /* Same syntax as box-shadow */
+}
+

@@ -1,30 +1,46 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
 
-  <title>Pente</title>
+    <title>Pente</title>
 
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,800' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="style.css" />
-  
-</head>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css" />
+
+  </head>
 <body>
-<h1>Jeu de Pente</h1>
+  <div id="bloc_page">
+    <h1>Jeu de Pente</h1>
+    <div class=container>
+      <div class="shadow-box block player1" id="Score">
+        <h3>Player 1 Captures :</h3>
+        <div class="content">      
+        </div>
+      </div>
+      <div class="shadow-box block player2" id="Score">
+        <h3>Player 2 Captures :</h3>
+        <div class="content">      
+        </div>
+      </div>
 
-  <div id="wrapper">
-    <table id="gameBoard"></table>
+      <div id="wrapper">
+        <table class="shadow" id="gameBoard"></table>
+      </div>
+
+      
+    </div>
+    <div id="msgArea"></div>
+    <div id="msgAreaRt"><span id="auxMessageArea"></span> <a href="#" class="plain" id="options" ></a></div>
+    <div id="stolenWhite"></div>
+    <div id="stolenBlack"></div>
+
+    <div style="clear:both"></div>
+
+    <div id="overlay"></div>
   </div>
-  <div id="msgArea"></div>
-  <div id="msgAreaRt"><span id="auxMessageArea"></span> <a href="#" class="plain" id="options" ></a></div>
-  <div id="stolenWhite"></div>
-  <div id="stolenBlack"></div>
-
-  <div style="clear:both"></div>
-
-  <div id="overlay"></div>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ></script>  
   <script src="pente.js"></script> 
