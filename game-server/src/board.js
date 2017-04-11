@@ -25,4 +25,8 @@ BoardModule.prototype.LogBoard = function() {
     }
 }
 
+BoardModule.prototype.CanPlace = function(x, y) {
+    return this.board[x][y] == this.states.Empty;
+}
+
 module.exports = BoardModule;
