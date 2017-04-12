@@ -30,6 +30,7 @@ GameManagerModule.prototype.StartGame = function () {
 
 	var startingPlayer = Math.floor((Math.random() * 2) + 1);
 	this.gameState.lastPlayed.playerId = this.gameState.players[(startingPlayer == 1 ? 2 : 1) - 1].id;
+	this.gameState.lastPlayed.timestamp = this.gameState.startTimestamp;
 
 	console.log("P1: " + this.gameState.players[0].id + " | P2: " + this.gameState.players[1].id + " | Starting: " + startingPlayer);
 }
@@ -43,9 +44,13 @@ GameManagerModule.prototype.Play = function(x, y, playerId) {
 
 	var player = this.gameState.players.find(player => player.id === playerId);
 	if (player === undefined) { return { status: 401 }; }
-	if (this.gameState.lastPlayed.playerId === player.id) {return { status: 406 }; }
+	if (this.gameState.lastPlayed.playerId === player.id) { return { status: 406 }; }
 
 	if (!this.gameState.board.CanPlace(this.gameState.turnNumber, parsedX, parsedY)) { return { status: 406 }; }
+	if (!this.PlacedInTime()) { 
+		this.gameState.winner = this.gameState.players[(player.playerIndex == 1 ? 2 : 1) - 1];
+		return { status: 406 };
+	}
 
 	this.PlacePiece(parsedX, parsedY, player);
 	return { status: 200 };
@@ -56,6 +61,12 @@ GameManagerModule.prototype.PlacePiece = function(x, y, player) {
 	this.UpdateGameState(x, y, player);
 }
 
+GameManagerModule.prototype.PlacedInTime = function() {
+	var elapsed = new Date().getTime() - this.gameState.lastPlayed.timestamp;
+	console.log("Time since last placed: " + elapsed);
+	return new Date().getTime() - this.gameState.lastPlayed.timestamp <= 10000;
+}
+
 GameManagerModule.prototype.UpdateGameState = function(x, y, player) {
 	var neighbouringPieces = this.gameState.board.GetNeighbouringPieces(x, y);
 
@@ -64,7 +75,12 @@ GameManagerModule.prototype.UpdateGameState = function(x, y, player) {
 	this.SetLastTurnValues(x, y, player);
 
 	this.gameState.board.LogBoard();
-	console.log("Score: " + player.clampScore);
+}
+
+GameManagerModule.prototype.CheckWinConditions = function(player, winningMove) {
+	if (winningMove || player.clampScore >= 5) {
+		this.gameState.winner = player;
+	}
 }
 
 GameManagerModule.prototype.CheckWinningMove = function(neighbouringPieces, player) {
@@ -126,12 +142,6 @@ GameManagerModule.prototype.CheckClamps = function(neighbouringPieces, player) {
 	}
 }
 
-GameManagerModule.prototype.CheckWinConditions = function(player, winningMove) {
-	if (winningMove || player.clampScore >= 5) {
-		this.gameState.winner = player;
-	}
-}
-
 GameManagerModule.prototype.SetLastTurnValues = function(x, y, player) {
 	this.gameState.lastPlayed.timestamp = new Date().getTime();
 	this.gameState.lastPlayed.playerId = player.id;
@@ -141,27 +151,27 @@ GameManagerModule.prototype.SetLastTurnValues = function(x, y, player) {
 }
 
 GameManagerModule.prototype.GetTurnInfo = function(playerId) {
-	if(playerId == this.gameState.players[0].id || playerId == this.gameState.players[1].id){
-		var turnInfo = {
-			status: 0,
-			board: this.gameState.board,
-			tenailleJ1: this.gameState.players[0].clampScore,
-			tenailleJ2: this.gameState.players[1].clampScore,
-			lastPlayed: {
-				x: this.gameState.lastPlayed.x,
-				y: this.gameState.lastPlayed.y
-			},
-			prolongation: false,
-			endGame: false,
-			detailEndGame: this.gameState.winner,
-			turnNumber: this.gameState.turnNumber
+	var player = this.gameState.players.find(player => player.id === playerId);
+	if (player !== undefined) {
+		return { 
+			status: 200, 
+			turnInfo: {
+				code: 200,
+				status: this.gameState.lastPlayed.playerId === player.id ? 0 : 1,
+				tableau: this.gameState.board.board,
+				nbTenaillesJ1: this.gameState.players[0].clampScore,
+				nbTenaillesJ2: this.gameState.players[1].clampScore,
+				dernierCoupX: this.gameState.lastPlayed.x,
+				dernierCoupY: this.gameState.lastPlayed.y,
+				prolongation: false,
+				finPartie: this.gameState.winner !== null,
+				detailFinPartie: this.gameState.winner !== null ? player.name + " a gagné!" : null,
+				numTour: this.gameState.turnNumber
+			}
 		};
-		return { status: 200, turnInfo: turnInfo };
 	}
-	else{
-		return { status: 401 };
-	}
-	
+
+	return { status: 401 };
 }
 
 GameManagerModule.prototype.ResetState = function() {
