@@ -138,8 +138,7 @@ window.onload = function() {
   $(window).resize(view.resizeBoard);
 }
 
-var clock;
-		
+
 $(document).ready(function() {
 	var clock;
 
@@ -158,3 +157,8 @@ $(document).ready(function() {
 	clock.start();
 
 });
+
+function GetPlayerID()
+        {
+            var playerID = document.getElementById("ID").value;
+        }

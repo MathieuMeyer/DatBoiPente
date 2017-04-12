@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+	<head>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0">
+
+		<title>Pente</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Macondo" rel='stylesheet' type='text/css'>
+		<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet"> 
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="flipclock/flipclock.css">
+
+	</head>
+	<body>
+		<div id="bloc_page">
+			<h1>Jeu de Pente</h1>
+			<div class="hr"></div>
+			<div class="flip-clock-wrapper">
+				<div class="clock"></div>
+				<div class="clock-message"></div>
+			</div>
+			<div class=container>
+				<div class="shadow-box block scoreboard" id="Score1">
+					<h3>Joueur 1</h3>
+					<h4>X Tenaille(s)</h4>
+				</div>
+				<div class="shadow-box block scoreboard" id="Score2">
+					<h3>Joueur 2</h3>
+					<h4>X Tenaille(s)</h4>
+				</div>		   
+				<div id="wrapper">
+					<table class="shadow" id="gameBoard"></table>				 
+				</div>   
+			</div>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="pente.js"></script>
+		<script src="flipclock/flipclock.js"></script>
+
+	</body>
+</html>
