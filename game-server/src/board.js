@@ -3,6 +3,7 @@ var BoardModule = function () {
 		x: { start: 0, end: 18 },
 		y: { start: 0, end: 18 }
 	}
+
 	this.states = {
 		Empty: 0,
 		PlayerOne: 1,
@@ -11,15 +12,10 @@ var BoardModule = function () {
 
 	this.board = [];
 	this.ResetBoard();
-	this.board[6][6] = this.states.PlayerOne;
-	this.board[8][6] = this.states.PlayerOne;
-	this.board[9][6] = this.states.PlayerOne;
-	this.board[10][6] = this.states.PlayerOne;
-	
-	this.board[1][1] = this.states.PlayerOne;
-	this.board[2][2] = this.states.PlayerOne;
+
+	this.board[2][2] = this.states.PlayerTwo;
+	this.board[3][3] = this.states.PlayerOne;
 	this.board[4][4] = this.states.PlayerOne;
-	this.board[5][5] = this.states.PlayerOne;
 };
 
 BoardModule.prototype.ResetBoard = function() {
