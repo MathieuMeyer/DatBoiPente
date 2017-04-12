@@ -3,6 +3,10 @@
 	margin: auto;
 }
 
+body{
+	/*background-color: grey;*/
+}
+
 #bloc_page{
 	height: 100%;
 	margin: auto;
@@ -10,6 +14,11 @@
 
 .container{
 	display: center;
+}
+
+.clock{
+	display: inline-block;
+	width: auto;
 }
 
 .block{
@@ -23,12 +32,17 @@
 	font-size: 14px;
 }
 
-.player1{
+#Score1{
 	float: left;
 }
 
-.player2{
+#Score2{
 	float: right;
+}
+
+.scoreboard{
+	width: 300px;
+	height: 200px;
 }
 
 table{
@@ -36,8 +50,9 @@ table{
 	height: 608px;
 	border-spacing: 0;
 	border-collapse: collapse;
-    box-shadow: 0 0 20px 2px black;
+    box-shadow: 0 0 10px 2px black;
 	background:url("board.png");
+	margin-bottom: 20px;
 }
 
 #wrapper{
@@ -49,11 +64,33 @@ table{
 }
 
 h1{
-	font-size: 50px;
+	font-size: 60px;
 	text-align: center;
 	padding-top: 15px;
 	padding-bottom: 25px;
 	font-family: 'Macondo', cursive;
+}
+
+h3{
+	font-size: 30px;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 25px;
+	font-family: 'Lora', serif;
+}
+
+h4{
+	font-size: 20px;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 25px;
+	font-family: 'Lora', serif;
+}
+
+.clock-message{
+	font-family: 'Lora', serif;
+	font-size: 30px;
+	color: red;
 }
 
 .hr{
