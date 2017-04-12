@@ -114,6 +114,10 @@ GameManagerModule.prototype.SetLastTurnValues = function(x, y, player) {
 	this.gameState.turnNumber++;
 }
 
+GameManagerModule.prototype.GetTurnInfo = function(playerId) {
+	return { status: 200 };
+}
+
 GameManagerModule.prototype.ResetState = function() {
 	this.gameState = {
 		startTimestamp: null,

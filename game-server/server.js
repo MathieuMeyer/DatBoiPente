@@ -34,7 +34,11 @@ app.get('/play/:x/:y/:playerId', function(req, res) {
 });
 
 app.get('/turn/:playerId', function(req, res) {
-	res.send(req.params.playerId)
+	var action = gameManager.GetTurnInfo(req.params.playerId);
+
+	res.status(action.status);
+	res.setHeader('Content-Type', 'application/json');
+	res.send(JSON.stringify(action.turnInfo));
 });
 
 // Launch server
