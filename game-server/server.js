@@ -15,7 +15,7 @@ app.get('/connect/:playerName', function(req, res) {
 		res.send(JSON.stringify({
 			idJoueur: action.player.id,
 			nomJoueur: action.player.name,
-			numJoueur: action.playerIndex,
+			numJoueur: action.player.playerIndex,
 			code: action.status
 		}));
 	}
@@ -26,7 +26,11 @@ app.get('/connect/:playerName', function(req, res) {
 });
 
 app.get('/play/:x/:y/:playerId', function(req, res) {
-	res.send(req.params.playerId + ' played ' + req.params.x + ':' + req.params.y)
+	var action = gameManager.Play(req.params.x, req.params.y, req.params.playerId);
+	
+	res.status(action.status);
+	res.setHeader('Content-Type', 'application/json');
+	res.send(JSON.stringify({ code: action.status }));
 });
 
 app.get('/turn/:playerId', function(req, res) {
