@@ -20,8 +20,8 @@ app.get('/connect/:playerName', function(req, res) {
 		}));
 	}
 	else {
-		res.setHeader('Content-Type', 'text/plain');
-		res.send('Unauthorized');
+		res.setHeader('Content-Type', 'application/json');
+		res.send(JSON.stringify({ code: action.status }));
 	}
 });
 
@@ -37,8 +37,27 @@ app.get('/turn/:playerId', function(req, res) {
 	var action = gameManager.GetTurnInfo(req.params.playerId);
 
 	res.status(action.status);
-	res.setHeader('Content-Type', 'application/json');
-	res.send(JSON.stringify(action.turnInfo));
+	console.log(action);
+	if (action.turnInfo !== undefined) {
+		res.setHeader('Content-Type', 'application/json');
+		res.send(JSON.stringify({ 
+				code: action.status,
+				status: action.turnInfo.status,
+				tableau: action.turnInfo.board,
+				nbTenaillesJ1: action.turnInfo.tenailleJ1,
+				nbTenaillesJ2: action.turnInfo.tenailleJ2,
+				dernierCoupX: action.turnInfo.lastPlayed.x,
+				dernierCoupY: action.turnInfo.lastPlayed.y,
+				prolongation: action.turnInfo.prolongation,
+				finPartie: action.turnInfo.endGame,
+				detailFinPartie: action.turnInfo.detailEndGame,
+				numTour: action.turnInfo.turnNumber
+			}));
+	}
+	else {
+		res.setHeader('Content-Type', 'application/json');
+		res.send(JSON.stringify({code: action.status}));
+	}
 });
 
 // Launch server

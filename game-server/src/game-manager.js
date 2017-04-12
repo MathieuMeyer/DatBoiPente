@@ -115,7 +115,27 @@ GameManagerModule.prototype.SetLastTurnValues = function(x, y, player) {
 }
 
 GameManagerModule.prototype.GetTurnInfo = function(playerId) {
-	return { status: 200 };
+	if(playerId == this.gameState.players[0].id || playerId == this.gameState.players[1].id){
+		var turnInfo = {
+			status: 0,
+			board: this.gameState.board,
+			tenailleJ1: this.gameState.players[0].clampScore,
+			tenailleJ2: this.gameState.players[1].clampScore,
+			lastPlayed: {
+				x: this.gameState.lastPlayed.x,
+				y: this.gameState.lastPlayed.y
+			},
+			prolongation: false,
+			endGame: false,
+			detailEndGame: this.gameState.winner,
+			turnNumber: this.gameState.turnNumber
+		};
+		return { status: 200, turnInfo: turnInfo };
+	}
+	else{
+		return { status: 401 };
+	}
+	
 }
 
 GameManagerModule.prototype.ResetState = function() {
