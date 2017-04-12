@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/MathieuMeyer/DatBoiPente#readme",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "shortid": "^2.2.8"
   }
 }
