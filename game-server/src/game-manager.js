@@ -59,10 +59,12 @@ GameManagerModule.prototype.PlacePiece = function(x, y, player) {
 GameManagerModule.prototype.UpdateGameState = function(x, y, player) {
 	var neighbouringPieces = this.gameState.board.GetNeighbouringPieces(x, y);
 
-	this.gameState.board.LogBoard();
-
 	this.CheckWinConditions(player, this.CheckWinningMove(neighbouringPieces, player));
+	this.CheckClamps(neighbouringPieces, player);
 	this.SetLastTurnValues(x, y, player);
+
+	this.gameState.board.LogBoard();
+	console.log("Score: " + player.clampScore);
 }
 
 GameManagerModule.prototype.CheckWinningMove = function(neighbouringPieces, player) {
@@ -76,12 +78,12 @@ GameManagerModule.prototype.CheckWinningMove = function(neighbouringPieces, play
 				var yPlusVector = neighbouringPieces[i][j].coordinates.y;
 
 				// Keep going in that direction until coordinate != player index then invert the vector
-				while (this.gameState.board.board[xPlusVector][yPlusVector] == player.playerIndex) {
+				var following = 0;
+				while (this.gameState.board.board[xPlusVector] !== undefined && this.gameState.board.board[xPlusVector][yPlusVector] == player.playerIndex) {
 					xPlusVector += vector.xAxis;
 					yPlusVector += vector.yAxis;
 				}
 
-				var following = 0;
 				var invertedVector = { xAxis: vector.xAxis * -1, yAxis: vector.yAxis * -1 };
 				xPlusVector += invertedVector.xAxis;
 				yPlusVector += invertedVector.yAxis;
@@ -90,10 +92,34 @@ GameManagerModule.prototype.CheckWinningMove = function(neighbouringPieces, play
 					yPlusVector += invertedVector.yAxis;
 					following++;
 				}
-				
-				// If 5 pieces -> winning move, if not continue looping x:y neighbours
+
 				if (following >= 5) {
 					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
+GameManagerModule.prototype.CheckClamps = function(neighbouringPieces, player) {
+	for (var i = -1; i <= 1; i++) {
+		for (var j = -1; j <= 1; j++) {
+			var otherPlayerIndex = player.playerIndex == 1 ? 2 : 1;
+			if (!(i === 0 && j === 0) && neighbouringPieces[i][j].value == otherPlayerIndex) {
+				var vector = { xAxis: i, yAxis: j };
+				var xPlusVector = neighbouringPieces[i][j].coordinates.x + vector.xAxis;
+				var yPlusVector = neighbouringPieces[i][j].coordinates.y + vector.yAxis;
+
+				if (this.gameState.board.board[xPlusVector] !== undefined && this.gameState.board.board[xPlusVector + vector.xAxis] !== undefined) {
+					if (this.gameState.board.board[xPlusVector][yPlusVector] == otherPlayerIndex && 
+							this.gameState.board.board[xPlusVector + vector.xAxis][yPlusVector + vector.yAxis] == player.playerIndex) {
+						this.gameState.board.board[xPlusVector][yPlusVector] = this.gameState.board.states.Empty;
+						this.gameState.board.board[neighbouringPieces[i][j].coordinates.x][neighbouringPieces[i][j].coordinates.y] = this.gameState.board.states.Empty;
+
+						this.gameState.players[player.playerIndex - 1].clampScore++;
+					}
 				}
 			}
 		}
@@ -101,7 +127,7 @@ GameManagerModule.prototype.CheckWinningMove = function(neighbouringPieces, play
 }
 
 GameManagerModule.prototype.CheckWinConditions = function(player, winningMove) {
-	if (winningMove || player.clampScore === 5) {
+	if (winningMove || player.clampScore >= 5) {
 		this.gameState.winner = player;
 	}
 }
