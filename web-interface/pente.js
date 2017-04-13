@@ -39,7 +39,7 @@ window.onload = function() {
 		view.initializeBoard();
 		$(window).resize(view.resizeBoard);
 }
-			
+
 $(document).ready(function() {
 	var clock;
 	clock = $('.clock').FlipClock({
@@ -58,7 +58,8 @@ $(document).ready(function() {
 });
 
 setInterval(function() {
-	$.get( "http://localhost:3000/turn/B1hbeVnpg", function( data ) {
+	var id = urlParam('ID');
+	$.get( "http://localhost:3000/turn/"+id, function( data ) {
 		for(var x = 0; x<data.tableau.length; x++){
 			for(var y = 0; y<data.tableau.length; y++){
 				var coordX = x.toString();
@@ -79,6 +80,23 @@ setInterval(function() {
 				}
 			}
 		}
-
 	});
 },500);
+
+function GetPlayerID(){
+	var playerID = document.getElementById("ID").value;
+}
+
+function urlParam(param) {
+	var vars = {};
+	window.location.href.replace( location.hash, '' ).replace( 
+		/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+		function( m, key, value ) { // callback
+			vars[key] = value !== undefined ? value : '';
+		}
+	);
+	if ( param ) {
+		return vars[param] ? vars[param] : null;	
+	}
+	return vars;
+}
