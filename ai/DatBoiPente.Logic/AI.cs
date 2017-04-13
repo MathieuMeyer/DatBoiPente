@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Remoting;
+using System.Threading;
 using System.Threading.Tasks;
 using DatBoiPente.Logic.Components;
 using DatBoiPente.Logic.Exceptions;
@@ -13,12 +14,16 @@ namespace DatBoiPente.Logic
 	    public static string Name = "AI_HereComeDatBoi";
 
 		private Connector _connector;
-	    private PlayerDetails _playerDetails;
-	    private GameState _gameState;
+	    private Game _game;
+	    private DecisionManager _decisionManager;
 
         public bool Connected => this._connector != null && this._connector.TestConnection();
 
-	    public AI() { }
+	    public AI()
+	    {
+	        this._game = new Game();
+            this._decisionManager = new DecisionManager();
+	    }
 
 		public void Connect(string webServiceUrl)
 		{
@@ -32,27 +37,31 @@ namespace DatBoiPente.Logic
 
 	    public void RequestGameConnection()
 	    {
-	        JsonObject playerDetails = (JsonObject) this._connector.Request($"connect/{AI.Name}", Method.GET);
-            
-	        if ((long) playerDetails["code"] == 200)
-	        {
-	            this._playerDetails = new PlayerDetails
-	            {
-	                Id = playerDetails["idJoueur"].ToString(),
-	                Name = playerDetails["nomJoueur"].ToString(),
-	                PlayerIndex = (int) (long) playerDetails["numJoueur"]
-	            };
-	        }
-	        else { throw new PlayerSlotsFullException(); }
+	        _game.RequestGameConnection(this._connector);
 	    }
 
-	    public async Task UpdateGameState()
+	    public async Task LaunchAi()
 	    {
-	        JsonObject gameState = (JsonObject) await this._connector.AsyncRequest($"turn/{this._playerDetails.Id}", Method.GET);
-	        this._gameState = new GameState()
-	        {
+	        while (true)
+            {
+                Thread.Sleep(500);
+                await this._game.UpdateGameState(this._connector);
+                if (this._game.GameState.IsPlaying)
+                {
+                    if (!this._game.GameState.IsGameOver)
+                    {
+                        if (this._game.GameState.IsOurTrun)
+                            await Play();
+                    }
+                    else Console.WriteLine("Game over");
+                }
+                else Console.WriteLine("Game is not playing");
+            }
+        }
 
-	        };
+	    public async Task Play()
+	    {
+	        await this._game.Play(this._connector, await _decisionManager.TakeDecision());
 	    }
 	}
 }

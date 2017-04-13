@@ -12,10 +12,6 @@ var BoardModule = function () {
 
 	this.board = [];
 	this.ResetBoard();
-
-	this.board[2][2] = this.states.PlayerTwo;
-	this.board[3][3] = this.states.PlayerOne;
-	this.board[4][4] = this.states.PlayerOne;
 };
 
 BoardModule.prototype.ResetBoard = function() {

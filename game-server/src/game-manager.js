@@ -63,7 +63,6 @@ GameManagerModule.prototype.PlacePiece = function(x, y, player) {
 
 GameManagerModule.prototype.PlacedInTime = function() {
 	var elapsed = new Date().getTime() - this.gameState.lastPlayed.timestamp;
-	console.log("Time since last placed: " + elapsed);
 	return new Date().getTime() - this.gameState.lastPlayed.timestamp <= 10000;
 }
 
@@ -152,6 +151,11 @@ GameManagerModule.prototype.SetLastTurnValues = function(x, y, player) {
 
 GameManagerModule.prototype.GetTurnInfo = function(playerId) {
 	var player = this.gameState.players.find(player => player.id === playerId);
+
+	if (!this.PlacedInTime()) { 
+		this.gameState.winner = this.gameState.players[(player.playerIndex == 1 ? 2 : 1) - 1];
+	}
+
 	if (player !== undefined && this.gameState.playing) {
 		return {
 			status: 200, 
