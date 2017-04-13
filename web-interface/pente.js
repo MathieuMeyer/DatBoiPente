@@ -56,7 +56,8 @@ $(document).ready(function() {
 
 setInterval(function() {
 	var id = urlParam('ID');
-	$.get( "http://localhost:3000/turn/"+id, function( data ) {
+	var url = urlParam('IP');
+	$.get( "http://"+url+":3000/turn/"+id, function( data ) {
 		if(data.nbTenaillesJ1 == 0 || data.nbTenaillesJ1 == 1){
 			$('#J1Tenaille').html('<p>'+ data.nbTenaillesJ1 +' Tenaille</p>');
 		}
