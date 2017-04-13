@@ -60,6 +60,18 @@ $(document).ready(function() {
 setInterval(function() {
 	var id = urlParam('ID');
 	$.get( "http://localhost:3000/turn/"+id, function( data ) {
+		if(data.nbTenaillesJ1 == 0 || data.nbTenaillesJ1 == 1){
+			$('#J1Tenaille').html('<p>'+ data.nbTenaillesJ1 +' Tenaille</p>');
+		}
+		else{
+			$('#J1Tenaille').html('<p>'+ data.nbTenaillesJ1 +' Tenailles</p>');
+		}	
+		if(data.nbTenaillesJ2 == 0 || data.nbTenaillesJ2 == 1){
+			$('#J2Tenaille').html('<p>'+ data.nbTenaillesJ2 +' Tenaille</p>');
+		}
+		else{
+			$('#J2Tenaille').html('<p>'+ data.nbTenaillesJ2 +' Tenailles</p>');
+		}
 		for(var x = 0; x<data.tableau.length; x++){
 			for(var y = 0; y<data.tableau.length; y++){
 				var coordX = x.toString();
