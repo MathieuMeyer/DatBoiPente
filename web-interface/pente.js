@@ -1,3 +1,6 @@
+
+		var id = urlParam('ID');
+		var url = urlParam('IP');
 var view = {
 
 	initializeBoard: function() {
@@ -16,7 +19,7 @@ var view = {
 				if (roww.length < 2) {
 					roww = "0" + roww;
 				}
-				var cellId = roww + column;
+				var cellId = column + roww;
 				cell.setAttribute('id', cellId);
 				row.appendChild(cell);
 			}
@@ -31,6 +34,12 @@ var view = {
 	},
 
 }
+
+$("table").on("click", "td", function(event) {
+	var rowClick = event.target.id.toString().substr(0, 2);
+	var columnClick = event.target.id.toString().substr(2, 3);
+	$.get( "http://"+url+":3000/play/"+rowClick+"/"+columnClick+"/"+id);
+});
 
 window.onload = function() {
 		view.initializeBoard();
@@ -55,8 +64,6 @@ $(document).ready(function() {
 });
 
 setInterval(function() {
-	var id = urlParam('ID');
-	var url = urlParam('IP');
 	$.get( "http://"+url+":3000/turn/"+id, function( data ) {
 		if(data.nbTenaillesJ1 == 0 || data.nbTenaillesJ1 == 1){
 			$('#J1Tenaille').html('<p>'+ data.nbTenaillesJ1 +' Tenaille</p>');
@@ -87,6 +94,9 @@ setInterval(function() {
 					case 2:
 						addWhitePiece(coordX+coordY);
 						break;
+					case 0:
+						removePiece(coordX+coordY);
+						break;
 				}
 			}
 		}
@@ -100,7 +110,6 @@ function GetServerIP(){
 	var ServerIP = document.getElementById("IP").value;
 }
 
-
 function addWhitePiece(coordId)
 {
 	var piece = document.getElementById(coordId);
@@ -111,6 +120,11 @@ function addBlackPiece(coordId)
 {
 	var piece = document.getElementById(coordId);
 	$(piece).addClass("black_piece");
+}
+
+function removePiece(coordId){
+	var piece = document.getElementById(coordId);
+	$(piece).removeClass("black_piece white_piece");
 }
 
 function urlParam(param) {
