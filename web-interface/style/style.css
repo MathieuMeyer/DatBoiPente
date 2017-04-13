@@ -111,11 +111,11 @@ h4{
 }
 
 .white_piece{
-	background:url("img/white_piece.png") no-repeat;
+	background:url("../img/white_piece.png") no-repeat;
     background-size: 30px 30px;
 }
 
 .black_piece{
-	background:url("img/black_piece.png") no-repeat;
+	background:url("../img/black_piece.png") no-repeat;
     background-size: 30px 30px;
 }
