@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatBoiPente.Logic", "DatBoiPente.Logic\DatBoiPente.Logic.csproj", "{FF40F37A-76AB-4471-982A-F7ED9995614C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatBoiPente.CommandPrompt", "DatBoiPente.CommandPrompt\DatBoiPente.CommandPrompt.csproj", "{5796227F-416F-4E29-AED2-69C57F8276CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF40F37A-76AB-4471-982A-F7ED9995614C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FF40F37A-76AB-4471-982A-F7ED9995614C}.Debug|x86.Build.0 = Debug|Any CPU
+		{FF40F37A-76AB-4471-982A-F7ED9995614C}.Release|x86.ActiveCfg = Release|Any CPU
+		{FF40F37A-76AB-4471-982A-F7ED9995614C}.Release|x86.Build.0 = Release|Any CPU
+		{5796227F-416F-4E29-AED2-69C57F8276CD}.Debug|x86.ActiveCfg = Debug|x86
+		{5796227F-416F-4E29-AED2-69C57F8276CD}.Debug|x86.Build.0 = Debug|x86
+		{5796227F-416F-4E29-AED2-69C57F8276CD}.Release|x86.ActiveCfg = Release|x86
+		{5796227F-416F-4E29-AED2-69C57F8276CD}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+EndGlobal
