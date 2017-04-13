@@ -1,37 +1,34 @@
-var model = {
-		boardSize: 19
-}
-
 var view = {
 
-		initializeBoard: function() {
-			var boardTarget = document.getElementById('gameBoard');
-			boardTarget.innerHTML = "";
-			for (var i = 0; i < model.boardSize; i ++) {
-				var row = document.createElement('tr');
-				for (var j = 0; j < model.boardSize; j ++) {
-					var cell = document.createElement('td');
-					var column = i.toString();
-					var roww = j.toString();
-					if (column.length < 2) {
-						column = "0" + column;
-					}
-					if (roww.length < 2) {
-						roww = "0" + roww;
-					}
-					var cellId = roww + column;
-					cell.setAttribute('id', cellId);
-					row.appendChild(cell);
+	initializeBoard: function() {
+		var boardSize = 19;
+		var boardTarget = document.getElementById('gameBoard');
+		boardTarget.innerHTML = "";
+		for (var i = 0; i < boardSize; i ++) {
+			var row = document.createElement('tr');
+			for (var j = 0; j < boardSize; j ++) {
+				var cell = document.createElement('td');
+				var column = i.toString();
+				var roww = j.toString();
+				if (column.length < 2) {
+					column = "0" + column;
 				}
-				boardTarget.appendChild(row);
+				if (roww.length < 2) {
+					roww = "0" + roww;
+				}
+				var cellId = roww + column;
+				cell.setAttribute('id', cellId);
+				row.appendChild(cell);
 			}
-			this.resizeBoard();
-		},
+			boardTarget.appendChild(row);
+		}
+		this.resizeBoard();
+	},
 
-		resizeBoard: function() {
-			var $cells = $('#gameBoard td');
-			$cells.height($cells.width());
-		},
+	resizeBoard: function() {
+		var $cells = $('#gameBoard td');
+		$cells.height($cells.width());
+	},
 
 }
 
@@ -84,10 +81,10 @@ setInterval(function() {
 				}
 				switch(data.tableau[x][y]){
 					case 1:
-						$('#'+coordX+coordY).html('<p>O</p>');
+						addBlackPiece(coordX+coordY);
 						break;
 					case 2:
-						$('#'+coordX+coordY).html('<p>X</p>');
+						addWhitePiece(coordX+coordY);
 						break;
 				}
 			}
@@ -97,6 +94,19 @@ setInterval(function() {
 
 function GetPlayerID(){
 	var playerID = document.getElementById("ID").value;
+}
+
+
+function addWhitePiece(coordId)
+{
+	var piece = document.getElementById(coordId);
+	$(piece).addClass("white_piece");
+}
+
+function addBlackPiece(coordId)
+{
+	var piece = document.getElementById(coordId);
+	$(piece).addClass("black_piece");
 }
 
 function urlParam(param) {

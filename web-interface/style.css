@@ -105,7 +105,17 @@ h4{
 	background:black;
 }
 
-.shadow-box {
+.shadow-box{
     -webkit-filter: drop-shadow( -2px 5px 5px gray );
             filter: drop-shadow( -2px 5px 5px gray ); /* Same syntax as box-shadow */
+}
+
+.white_piece{
+	background:url("img/white_piece.png") no-repeat;
+    background-size: 30px 30px;
+}
+
+.black_piece{
+	background:url("img/black_piece.png") no-repeat;
+    background-size: 30px 30px;
 }
