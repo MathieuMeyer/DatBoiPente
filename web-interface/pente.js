@@ -1,37 +1,34 @@
-var model = {
-		boardSize: 19
-}
-
 var view = {
 
-		initializeBoard: function() {
-			var boardTarget = document.getElementById('gameBoard');
-			boardTarget.innerHTML = "";
-			for (var i = 0; i < model.boardSize; i ++) {
-				var row = document.createElement('tr');
-				for (var j = 0; j < model.boardSize; j ++) {
-					var cell = document.createElement('td');
-					var column = i.toString();
-					var roww = j.toString();
-					if (column.length < 2) {
-						column = "0" + column;
-					}
-					if (roww.length < 2) {
-						roww = "0" + roww;
-					}
-					var cellId = roww + column;
-					cell.setAttribute('id', cellId);
-					row.appendChild(cell);
+	initializeBoard: function() {
+		var boardSize = 19;
+		var boardTarget = document.getElementById('gameBoard');
+		boardTarget.innerHTML = "";
+		for (var i = 0; i < boardSize; i ++) {
+			var row = document.createElement('tr');
+			for (var j = 0; j < boardSize; j ++) {
+				var cell = document.createElement('td');
+				var column = i.toString();
+				var roww = j.toString();
+				if (column.length < 2) {
+					column = "0" + column;
 				}
-				boardTarget.appendChild(row);
+				if (roww.length < 2) {
+					roww = "0" + roww;
+				}
+				var cellId = roww + column;
+				cell.setAttribute('id', cellId);
+				row.appendChild(cell);
 			}
-			this.resizeBoard();
-		},
+			boardTarget.appendChild(row);
+		}
+		this.resizeBoard();
+	},
 
-		resizeBoard: function() {
-			var $cells = $('#gameBoard td');
-			$cells.height($cells.width());
-		},
+	resizeBoard: function() {
+		var $cells = $('#gameBoard td');
+		$cells.height($cells.width());
+	},
 
 }
 
@@ -60,6 +57,18 @@ $(document).ready(function() {
 setInterval(function() {
 	var id = urlParam('ID');
 	$.get( "http://localhost:3000/turn/"+id, function( data ) {
+		if(data.nbTenaillesJ1 == 0 || data.nbTenaillesJ1 == 1){
+			$('#J1Tenaille').html('<p>'+ data.nbTenaillesJ1 +' Tenaille</p>');
+		}
+		else{
+			$('#J1Tenaille').html('<p>'+ data.nbTenaillesJ1 +' Tenailles</p>');
+		}	
+		if(data.nbTenaillesJ2 == 0 || data.nbTenaillesJ2 == 1){
+			$('#J2Tenaille').html('<p>'+ data.nbTenaillesJ2 +' Tenaille</p>');
+		}
+		else{
+			$('#J2Tenaille').html('<p>'+ data.nbTenaillesJ2 +' Tenailles</p>');
+		}
 		for(var x = 0; x<data.tableau.length; x++){
 			for(var y = 0; y<data.tableau.length; y++){
 				var coordX = x.toString();
@@ -72,10 +81,10 @@ setInterval(function() {
 				}
 				switch(data.tableau[x][y]){
 					case 1:
-						$('#'+coordX+coordY).html('<p>O</p>');
+						addBlackPiece(coordX+coordY);
 						break;
 					case 2:
-						$('#'+coordX+coordY).html('<p>X</p>');
+						addWhitePiece(coordX+coordY);
 						break;
 				}
 			}
@@ -88,6 +97,19 @@ function GetPlayerID(){
 }
 function GetServerIP(){
 	var ServerIP = document.getElementById("IP").value;
+}
+
+
+function addWhitePiece(coordId)
+{
+	var piece = document.getElementById(coordId);
+	$(piece).addClass("white_piece");
+}
+
+function addBlackPiece(coordId)
+{
+	var piece = document.getElementById(coordId);
+	$(piece).addClass("black_piece");
 }
 
 function urlParam(param) {
