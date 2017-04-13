@@ -47,6 +47,11 @@ app.get('/turn/:playerId', function(req, res) {
 	}
 });
 
+app.get('*', function(req, res) {
+	res.setHeader('Content-Type', 'text/plain');
+	res.status(404).send('Not Found');
+});
+
 // Launch server
 app.listen(env.port, function () {
 	console.log('Server running on port ' + env.port)
