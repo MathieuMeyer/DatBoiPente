@@ -8,7 +8,7 @@ using RestSharp;
 
 namespace DatBoiPente.Logic.Components
 {
-    class Game
+    public class Game
     {
         private PlayerDetails _playerDetails;
         private GameState _gameState;
