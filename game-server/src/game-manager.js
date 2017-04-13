@@ -152,8 +152,8 @@ GameManagerModule.prototype.SetLastTurnValues = function(x, y, player) {
 
 GameManagerModule.prototype.GetTurnInfo = function(playerId) {
 	var player = this.gameState.players.find(player => player.id === playerId);
-	if (player !== undefined) {
-		return { 
+	if (player !== undefined && this.gameState.playing) {
+		return {
 			status: 200, 
 			turnInfo: {
 				code: 200,
