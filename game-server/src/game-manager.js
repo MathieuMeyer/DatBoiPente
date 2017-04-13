@@ -152,13 +152,21 @@ GameManagerModule.prototype.SetLastTurnValues = function(x, y, player) {
 GameManagerModule.prototype.GetTurnInfo = function(playerId) {
 	var player = this.gameState.players.find(player => player.id === playerId);
 
-	if (!this.PlacedInTime()) { 
+	if (new Date().getTime() - this.gameState.startTimestamp >= 600000) {
+		this.gameState.prolongation = true;
+		var scoreDifference = this.gameState.players[0].clampScore - this.gameState.players[1].clampScore;
+		if (scoreDifference !== 0) {
+			this.gameState.winner = scoreDifference > 0 ? this.gameState.players[0] : this.gameState.players[1];
+		}
+	}
+
+	if (!this.PlacedInTime()) {
 		this.gameState.winner = this.gameState.players[(player.playerIndex == 1 ? 2 : 1) - 1];
 	}
 
 	if (player !== undefined && this.gameState.playing) {
 		return {
-			status: 200, 
+			status: 200,
 			turnInfo: {
 				code: 200,
 				status: this.gameState.lastPlayed.playerId === player.id ? 0 : 1,
@@ -167,9 +175,9 @@ GameManagerModule.prototype.GetTurnInfo = function(playerId) {
 				nbTenaillesJ2: this.gameState.players[1].clampScore,
 				dernierCoupX: this.gameState.lastPlayed.x,
 				dernierCoupY: this.gameState.lastPlayed.y,
-				prolongation: false,
+				prolongation: this.gameState.prolongation,
 				finPartie: this.gameState.winner !== null,
-				detailFinPartie: this.gameState.winner !== null ? player.name + " a gagné!" : null,
+				detailFinPartie: this.gameState.winner !== null ? this.gameState.winner.name + " a gagné!" : null,
 				numTour: this.gameState.turnNumber
 			}
 		};
@@ -184,6 +192,7 @@ GameManagerModule.prototype.ResetState = function() {
 		playing: false,
 		turnNumber: 0,
 		board: new Board(),
+		prolongation: false,
 		players: [
 			null, null
 		],
