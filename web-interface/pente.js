@@ -86,6 +86,9 @@ setInterval(function() {
 function GetPlayerID(){
 	var playerID = document.getElementById("ID").value;
 }
+function GetServerIP(){
+	var ServerIP = document.getElementById("IP").value;
+}
 
 function urlParam(param) {
 	var vars = {};

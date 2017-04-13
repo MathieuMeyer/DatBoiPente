@@ -1,0 +1,35 @@
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" 
+    crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+
+    <title>Pente</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Macondo" rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css" />
+
+  </head>
+<body>
+  <div id="bloc_page">
+    <h1>Jeu de Pente</h1>
+        <div class="hr"></div>
+    <form action="gameBoard.html" class="pure-form pure-form-aligned">
+      <fieldset>
+        <div class="pure-control-group">
+          <label for="name">ID :</label>
+          <input type="text" id="ID" name="ID" placeholder="ID" /> 
+        </div>
+        <div class="pure-control-group">
+          <label for="IP/Nom de domaine du serveur">IP/Nom de domaine :</label>
+          <input type="text" id="IP" name="IP" />
+          <input class="pure-button pure-button-primary" type="submit" onclick="GetPlayerID();" />
+        </div>
+      </fieldset>      
+    </form>
+  </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ></script>
+  <script src="pente.js"></script> 
+</body>
+</html>
