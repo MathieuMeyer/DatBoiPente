@@ -63,7 +63,7 @@ GameManagerModule.prototype.PlacePiece = function(x, y, player) {
 
 GameManagerModule.prototype.PlacedInTime = function() {
 	var elapsed = new Date().getTime() - this.gameState.lastPlayed.timestamp;
-	return new Date().getTime() - this.gameState.lastPlayed.timestamp <= 10000;
+	return new Date().getTime() - this.gameState.lastPlayed.timestamp <= 12000;
 }
 
 GameManagerModule.prototype.UpdateGameState = function(x, y, player) {
