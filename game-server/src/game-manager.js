@@ -79,6 +79,7 @@ GameManagerModule.prototype.UpdateGameState = function(x, y, player) {
 GameManagerModule.prototype.CheckWinConditions = function(player, winningMove) {
 	if (winningMove || player.clampScore >= 5) {
 		this.gameState.winner = player;
+		this.gameState.playing = false;
 	}
 }
 
