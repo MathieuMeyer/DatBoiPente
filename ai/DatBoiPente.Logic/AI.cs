@@ -3,15 +3,12 @@ using System.Runtime.Remoting;
 using System.Threading;
 using System.Threading.Tasks;
 using DatBoiPente.Logic.Components;
-using DatBoiPente.Logic.Exceptions;
-using RestSharp;
-using RestSharp.Extensions;
 
 namespace DatBoiPente.Logic
 {
 	public class AI
 	{
-	    public static string Name = "AI_HereComeDatBoi";
+	    public static string Name = "0002ARRA";
 
 		private Connector _connector;
 	    private Game _game;
