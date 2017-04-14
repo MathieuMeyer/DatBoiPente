@@ -10,8 +10,8 @@ namespace DatBoiPente.Logic
     {
         public async Task<GameState.LastPlayed> TakeDecision(Game game)
         {
-            //if (game.GameState.Turn == 0)
-            //    return new GameState.LastPlayed(9, 9);
+            if (game.GameState.Turn == 0)
+                return new GameState.LastPlayed(9, 9);
 
             GameState.LastPlayed decision = new GameState.LastPlayed(0, 0);
 
