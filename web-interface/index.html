@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jeu de Pente">
+    <title>Pente</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/grids-responsive-min.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="style/layouts/blog.css">
+    <link rel="stylesheet" href="style/style.css" />
+</head>
+<body>
+    <div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="header">
+            <h1 class="brand-title">Jeu de Pente</h1>
+            <h2 class="brand-tagline">Connexion</h2>        
+            <form action="gameBoard.html" class="pure-form pure-form-aligned">
+                <fieldset>
+                    <div class="pure-control-group">
+                        <label for="name">ID</label>
+                        <input type="text" id="ID" name="ID" /> 
+                    </div>
+                    <div class="pure-control-group">
+                        <label for="IP/Nom de domaine du serveur">IP/Nom de domaine</label>
+                        <input type="text" id="IP" name="IP" />                        
+                    </div>
+                    <input class="button" type="submit" onclick="GetPlayerID(); GetServerID();" value="Valider" />
+                </fieldset>      
+            </form>
+        </div>
+    </div>
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            <!-- A wrapper for all the blog posts -->
+            <div class="posts">
+                <!-- A single blog post -->
+                <h1 class="content-subhead"></h1>
+                <section class="post">
+                    <header class="post-header">
+                        <h2 class="post-title">Le jeu de Pente</h2>
+                    </header>
+                    <div class="post-description">
+                        <p>
+                            Pente (/pεnte/) est un jeu de société combinatoire abstrait qui oppose deux joueurs : généralement Blanc et Noir.
+                            Il se joue sur un tablier, le goban, de trois cent soixante-et-une intersections, dix-neuf sur dix-neuf, le même que celui du jeu de go, un jeu similaire au pente,
+                            appelé gomoku narabe (五目並べ) au Japon (import du wǔzi qí (五子棋) chinois) y est d'ailleurs joué. </br>Il existe deux façons de gagner la partie :
+                            <ul>
+                                <li>aligner cinq pions de sa couleur</li>
+                                <li>capturer cinq paires de pions à l’adversaire.</li>
+                            </ul>
+                            Ces règles expliquent l’étymologie du nom de Pente, d’après le mot grec « πέντε » signifiant « cinq ».
+                            Les règles sont dues à Gary Gabrel, un habitant de l’Oklahoma, qui adapta en 1973 les règles d’un jeu japonais, le ninuki-renju.
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="posts">
+                <!-- A single blog post -->
+                <h1 class="content-subhead"></h1>
+                <section class="post">
+                    <header class="post-header">
+                        <h2 class="post-title">Les règles du jeu</h2>
+                    </header>
+                    <div class="post-description">
+                        <p>
+                            Chaque joueur, Blanc et Noir, pose l’un après l’autre un pion de sa couleur sur le goban. Blanc commence toujours la partie au centre et Noir répond en posant son
+                            pion sur une autre intersection de son choix. Le deuxième coup de Blanc ne doit pas être placé à moins de trois intersections du pion initial. Cette contrainte ne 
+                            vaut que pour ce deuxième coup et répond au souci de ne pas avantager outre mesure le joueur qui commence.
+                        </p>
+                        <p>
+                            Les alignements pris en compte peuvent être horizontaux, verticaux ou diagonaux. La capture d’une paire de pions survient lorsqu’un joueur place un de ses pions à
+                            l’extrémité d’un alignement de deux pions adverses contigus (ni plus, ni moins) et dont l’autre extrémité est déjà occupée par un de ses propres pions. Si le pion 
+                            nouvellement placé vient fermer plusieurs alignements, il capture tous les pions adverses des lignes ainsi fermées. Les pions capturés sont sortis du goban.
+                        </p>
+                        <p> 
+                            Comme indiqué en introduction, le gagnant est celui qui aligne cinq de ses pions de manière contiguë, comme au jeu de morpion ou qui capture cinq paires de pions 
+                            adverses. Ces deux objectifs sont suffisamment contradictoires pour offrir un grand intérêt stratégique au jeu.
+                        </p>
+                            Une variante consiste à jouer à deux contre deux, obligeant chaque joueur à deviner l’objectif de son partenaire.
+                        </p>
+                    </div>
+                </section>
+            </div>
