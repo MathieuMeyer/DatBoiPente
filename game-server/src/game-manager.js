@@ -28,7 +28,7 @@ GameManagerModule.prototype.StartGame = function () {
 	this.gameState.playing = true;
 	this.gameState.startTimestamp = new Date().getTime();
 
-	var startingPlayer = Math.floor((Math.random() * 2) + 1);
+	var startingPlayer = 2;//Math.floor((Math.random() * 2) + 1);
 	this.gameState.lastPlayed.playerId = this.gameState.players[(startingPlayer == 1 ? 2 : 1) - 1].id;
 	this.gameState.lastPlayed.timestamp = this.gameState.startTimestamp;
 
@@ -152,7 +152,7 @@ GameManagerModule.prototype.SetLastTurnValues = function(x, y, player) {
 GameManagerModule.prototype.GetTurnInfo = function(playerId) {
 	var player = this.gameState.players.find(player => player.id === playerId);
 
-	if (new Date().getTime() - this.gameState.startTimestamp >= 600000) {
+	if (this.gameState.playing && new Date().getTime() - this.gameState.startTimestamp >= 600000) {
 		this.gameState.prolongation = true;
 		var scoreDifference = this.gameState.players[0].clampScore - this.gameState.players[1].clampScore;
 		if (scoreDifference !== 0) {

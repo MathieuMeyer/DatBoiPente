@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DatBoiPente.Logic.Components
+﻿namespace DatBoiPente.Logic.Components
 {
     public class Pattern
     {
-        private Board.BoardCellState[] _cells;
+        private BoardCell[] _cells;
 
-        public Board.BoardCellState[] Cells => _cells;
+        public BoardCell[] Cells => _cells;
 
-        public Pattern(Board.BoardCellState[] cells)
+        public Pattern(BoardCell[] cells)
         {
             this._cells = cells;
         }
@@ -21,7 +15,7 @@ namespace DatBoiPente.Logic.Components
         {
             if (pattern.Cells.Length != this._cells.Length) { return false; }
             for (int i = 0; i < this._cells.Length; i++)
-                if (this._cells[i] != pattern.Cells[i]) return false;
+                if (this._cells[i].State != pattern.Cells[i].State) return false;
 
             return true;
         }
