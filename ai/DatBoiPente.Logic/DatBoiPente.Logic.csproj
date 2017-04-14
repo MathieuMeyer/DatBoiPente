@@ -37,10 +37,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Board.cs" />
+    <Compile Include="Components\BoardCell.cs" />
     <Compile Include="Components\Game.cs" />
     <Compile Include="Components\GameState.cs" />
+    <Compile Include="Components\Pattern.cs" />
     <Compile Include="Components\PlayerDetails.cs" />
+    <Compile Include="DecisionManager.cs" />
     <Compile Include="Exceptions\PlayerSlotsFullException.cs" />
+    <Compile Include="Geometry\Point.cs" />
+    <Compile Include="Geometry\PointEqualityComparer.cs" />
+    <Compile Include="Geometry\Polygon.cs" />
+    <Compile Include="NodeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AI.cs" />
     <Compile Include="Components\Connector.cs" />

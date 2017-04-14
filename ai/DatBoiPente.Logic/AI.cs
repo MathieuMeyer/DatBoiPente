@@ -61,7 +61,7 @@ namespace DatBoiPente.Logic
 
 	    public async Task Play()
 	    {
-	        await this._game.Play(this._connector, await _decisionManager.TakeDecision());
+	        await this._game.Play(this._connector, await _decisionManager.TakeDecision(this._game));
 	    }
 	}
 }
